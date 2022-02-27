@@ -10,7 +10,7 @@ import datetime
 
 #LIVE DETECTION
 
-mymodel=load_model('mymodel.h5')
+model=load_model('model.h5')
 
 cap=cv2.VideoCapture(1)
 face_cascade=cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
@@ -24,7 +24,7 @@ while cap.isOpened():
         test_image=image.load_img('temp.jpg',target_size=(150,150,3))
         test_image=image.img_to_array(test_image)
         test_image=np.expand_dims(test_image,axis=0)
-        pred=mymodel.predict(test_image)[0][0]
+        pred=model.predict(test_image)[0][0]
         if pred==1:
             cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),3)
             cv2.putText(img,'NO MASK',((x+w)//2,y+h+20),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),3)
